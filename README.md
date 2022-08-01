@@ -23,7 +23,7 @@
 
 # Commands:	(executable while in folder ../src/runner/ )
 
-pm2 start duel-runner.js	To start for the first time, you can use "pm2 start 0" afterwards
-pm2 logs			To show the script running/doing it's job			
-Strg + C			To exit the logs
-pm2 stop 0			To stop the script
+- pm2 start duel-runner.js	To start for the first time, you can use "pm2 start 0" afterwards
+- pm2 logs			To show the script running/doing it's job			
+- Strg + C			To exit the logs
+- pm2 stop 0			To stop the script
