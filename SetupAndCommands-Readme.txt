@@ -1,5 +1,6 @@
 ## Setup
 
+0. Rename "SAMPLE-config.json" in the src-Folder to config.json
 1. Get into the src/config.json and enter your public key at "address"
 2. Get into the src/runner/duel-runner.js edit
 	// Hero & Game Data

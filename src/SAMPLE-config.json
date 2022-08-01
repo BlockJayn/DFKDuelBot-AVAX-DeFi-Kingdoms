@@ -1,0 +1,14 @@
+{
+    "wallet": {
+        "address": "0x...REPLACE WITH YOUR PUBLIC KEY HERE",
+        "encryptedWalletPath": "./w.json"
+    },
+    "duelContract": "0xE97196f4011dc9DA0829dd8E151EcFc0f37EE3c7",
+    "useBackupRpc": false,
+    "rpc": {
+        "harmonyRpc": "https://api.harmony.one",
+        "poktRpc": "https://harmony-0-rpc.gateway.pokt.network"
+    },
+    "gasPrice": 120000000000,
+    "gasLimit": 9000000
+}
