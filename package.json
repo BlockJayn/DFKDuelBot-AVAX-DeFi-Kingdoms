@@ -1,0 +1,20 @@
+{
+  "name": "dfk_duel_runner",
+  "version": "1.33.7",
+  "description": "Automatically send your DFK-Heroes to duel",
+  "main": "src/runner/duel-runner",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "bluebird": "^3.7.2",
+    "ethers": "^5.5.2"
+  },
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "^16.12.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
