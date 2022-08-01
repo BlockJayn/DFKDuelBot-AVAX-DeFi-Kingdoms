@@ -21,7 +21,7 @@
 - pm2 restarts the script automatically in case of a script-crash due to certain circumstances
 
 
-# Commands:	(executable while in folder ../src/runner/ )
+## Commands:	(executable while in folder ../src/runner/ )
 
 - pm2 start duel-runner.js	To start for the first time, you can use "pm2 start 0" afterwards
 - pm2 logs			To show the script running/doing it's job			
