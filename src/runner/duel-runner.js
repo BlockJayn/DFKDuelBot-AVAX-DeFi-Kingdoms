@@ -27,9 +27,9 @@ let start_rpc = config.rpc.harmonyRpc    // Start with Main-RPC
 let current_rpc
 
 // Hero & Game Data
-const seedPassword = 'INSERTYOURPASSWORDHERE'             //  Password for encrypting your seedphrase
+const seedPassword = 'fuckthis'             //  Password for encrypting your seedphrase
 const type = 1                              //  Duel Game-Type = 1, 3 or 9
-const heroid = [12345]                      //  Duel Hero ID(s), like [ '260714', '154849', '30932' ]
+const heroid = [76568]                      //  Duel Hero ID(s), like [ '260714', '154849', '30932' ]
 const jewelfee = '0x016345785d8a0000'       //  Duel Jewel-Fee in HEX = 100000000000000000
 const background = 4                        //  Duel Background
 const stat = 0                              //  Duel Stat
@@ -41,9 +41,7 @@ const waitTimeAfterTXFail = 10      // Wait till next try after Error
 const transaction_timeout = 70      // How long to wait, till Timeout
 
 /*****************************************************************/
-// TODO: - Check if enough ONE/JEWEL/GOLD Wallet
-//       - Implement 3vs3 / 9vs9
-//       - Fix node | pm2    w.json / path problem
+
 
 
 // Function: RPC Network / Provider
