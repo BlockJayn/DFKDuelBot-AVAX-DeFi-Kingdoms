@@ -1,36 +1,14 @@
 {
     "wallet": {
         "address": "0x...REPLACE WITH YOUR PUBLIC KEY HERE",
-        "encryptedWalletPath": "./w.json",
-        "seedPassword": "REPLACE WITH YOUR SEED PASSWORD"
+        "encryptedWalletPath": "./w.json"
     },
     "duelContract": "0xE97196f4011dc9DA0829dd8E151EcFc0f37EE3c7",
+    "useBackupRpc": false,
     "rpc": {
-        "rpc_auto_switch": true,
-        "useBackupRpc": false,
         "harmonyRpc": "https://api.harmony.one",
         "poktRpc": "https://harmony-0-rpc.gateway.pokt.network"
     },
-    "gas": {
-        "gasPrice": 120000000000,
-        "gasLimit": 9000000
-    },
-    "timers": {
-        "waitTimeAfterSuccess": 10,
-        "waitTimeAfterError": 10,
-        "waitTimeAfterTXFail": 10,
-        "transaction_timeout": 70,
-        "waitTimeLobby": 10,
-        "waitBlockTimeToAutocomplete": 1
-    },
-    "game": {
-        "gameType": 1,
-        "heroid": [
-            76543
-        ],
-        "background": 4,
-        "stat": 8,
-        "activateAutoCompleteDuel": true,
-        "jewelfee": "0x016345785d8a0000"
-    }
+    "gasPrice": 120000000000,
+    "gasLimit": 9000000
 }
