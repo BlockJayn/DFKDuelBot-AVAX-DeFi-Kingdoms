@@ -6,6 +6,8 @@ w*.json
 *w.json
 MY-duel-runner.js
 MY-config.json
+MY-*.js
+MY-*.json
 
 # Logs
 logs
