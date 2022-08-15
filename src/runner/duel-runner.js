@@ -148,7 +148,7 @@ function getRpc() {
         if (start_rpc) {
 
             current_rpc = start_rpc     // set current used RPC
-            console.log('-----------------------------------------------------')
+            console.log('-----------------------------------------------------\n')
             console.log('🌐 Using Network: ' + current_rpc + '\n');
 
             start_rpc = false           // deactivate startRPC for next time, use opposite of current_RPC next time
@@ -158,13 +158,13 @@ function getRpc() {
 
             if (current_rpc === config.rpc.harmonyRpc) {
                 current_rpc = config.rpc.poktRpc;
-                console.log('-----------------------------------------------------')
+                console.log('-----------------------------------------------------\n')
                 console.log('🔀 Switching to Backup-Network: ' + config.rpc.poktRpc + '\n')
                 return current_rpc
             }
             else {
                 current_rpc = config.rpc.harmonyRpc;
-                console.log('-----------------------------------------------------')
+                console.log('-----------------------------------------------------\n')
                 console.log('🔀 Switching to Mainnet: ' + config.rpc.harmonyRpc + '\n')
                 return current_rpc
             }
@@ -414,8 +414,6 @@ async function sendToDuel() {
 
     // get Hero-Data (Name etc. from external API)
     const herodata = await getHeroMetaData(heroid[0]);   // console.log(herodata)
-
-
 
     try {
         console.log(`⚔️  Sending ${herodata.firstname_string} ${herodata.lastname_string} to Duel-Lobby...\n`);
