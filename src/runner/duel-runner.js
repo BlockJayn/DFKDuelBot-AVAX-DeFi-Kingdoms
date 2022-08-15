@@ -44,7 +44,7 @@ const waitBlockTimeToAutocomplete = config.timers.waitBlockTimeToAutocomplete   
 
 /*****************************************************************/
 
-
+// Function: getPlayerDuelEntries (Lobby)
 
 async function getPlayerDuelEntries(walletaddress) {
 
@@ -89,6 +89,8 @@ async function getPlayerDuelEntries(walletaddress) {
 
 }
 
+
+// Function: getActiveDuels (Matched in Lobby, but not completed)
 
 async function getActiveDuels(walletaddress) {
 
