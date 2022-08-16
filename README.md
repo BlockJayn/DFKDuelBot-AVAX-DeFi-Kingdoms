@@ -1,5 +1,15 @@
 # DFKDuelRunner
 
+## What can this Bot do?
+
+This is a Duel-Bot for the Harmony / DeFi-Kingdoms game.
+The Bot automatically enters the game-lobby to fight other players in DeFi-Kingdoms, a DeFi game built on the Harmony-blockchain.
+The bot sends repetitive transactions in a loop to the duel-smart-contract and has the following functions:
+1. Join the game-lobby with a hero automatically
+2. Autocomplete the game automatically if there is a duel-match
+3. Avoids blacklisted players that are too strong. (via blacklisted Hero-Ids in config - only in 1vs1 game-type currently)
+4. Switches the RPC-network automatically to counteract network-outages
+
 ## Setup
 
 0. Rename "SAMPLE-config.json" in Folder "src" to "config.json".
