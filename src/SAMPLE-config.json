@@ -32,5 +32,12 @@
         "stat": 8,
         "activateAutoCompleteDuel": true,
         "jewelfee": "0x016345785d8a0000"
+    },
+    "blacklist": {
+        "heroBlacklistIds": [
+            193398,
+            83208
+        ],
+        "blacklistActive": true
     }
 }
