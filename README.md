@@ -9,6 +9,7 @@ The bot sends repetitive transactions in a loop to the duel-smart-contract and h
 2. Autocomplete the game automatically if there is a duel-match
 3. Avoids blacklisted players that are too strong. (via blacklisted Hero-Ids in config - only in 1vs1 game-type currently)
 4. Switches the RPC-network automatically to counteract network-outages
+5. The Bot also has several options to set your own customized preferences
 
 ## Setup
 
@@ -24,13 +25,13 @@ The bot sends repetitive transactions in a loop to the duel-smart-contract and h
 
 ## Run the script
 
+I strongly recommend to run the script via "pm2" instead of "npm" (after setup via "npm"), as there can be some reason why the script crashes or needs to be restarted from scratch automatically. "pm2" does exactly this, restarting the script automatically if necessary. (which is also considered in this script-code)
 - Install pm2 via "npm install pm2 -g"
 - pm2 restarts the script automatically in case of a script-crash due to certain circumstances
 
 ## Commands:	(executable while in folder ../src/runner/ )
 
-- pm2 start duel-runner.js	To start for the first time, you can use "pm2 start 0" afterwards
-- pm2 logs			To show the script running/doing it's job			
-- Strg + C			To exit the logs
-<<<<<<< HEAD
-- pm2 stop 0		To stop the script
+- pm2 start duel-runner.js - To start for the first time, you can use "pm2 start 0" afterwards
+- pm2 logs			- To show the script running/doing it's job			
+- Strg + C			- To exit the logs
+- pm2 stop 0		- To stop the script
