@@ -38,8 +38,9 @@ const jewelfee = config.game.jewelfee                                       //  
 const background = config.game.background                                   //  Duel Background
 const stat = config.game.stat                                               //  Duel Stat
 const activateAutoCompleteDuel = config.game.activateAutoCompleteDuel       //  Automatically Completes Duels
-const activateBlacklistedHeroIds = config.blacklist.blacklistActive
-const blacklistedHeroIds = config.blacklist.heroBlacklistIds
+const activateBlacklistedHeroIds = config.blacklist.blacklistActive         //  Don't join Lobby when blacklisted Hero is in Lobby or Active Game, only works for Game-Type "1", Blacklist gets ignored in other game-types
+const blacklistedHeroIds = config.blacklist.heroBlacklistIds                //  Array with blacklisted Hero IDs
+const blacklistLobbyOnly = config.blacklist.blacklistLobbyOnly              //  Blacklisted Heroes can be in Lobby or actively in a Duel. Set "true" to ignore active Duels (Only Scan Lobby for blacklisted Heroes)
 
 // Timer - in seconds
 const waitTimeAfterSuccess = config.timers.waitTimeAfterSuccess                 // Wait till next try after Success
@@ -48,9 +49,21 @@ const waitTimeAfterTXFail = config.timers.waitTimeAfterTXFail                   
 const transaction_timeout = config.timers.transaction_timeout                   // How long to wait, till Timeout
 const waitTimeLobby = config.timers.waitTimeLobby                               // How long to wait to check again, if Hero is still in Lobby without a Match
 const waitBlockTimeToAutocomplete = config.timers.waitBlockTimeToAutocomplete   // How many Blocks to wait till Duel gets Auto-Completed
+const waitTimeBlacklist = config.timers.waitTimeBlacklist                       // Wait till next try after Blacklisted Hero found
 
 /*****************************************************************/
 
+
+// TO DO
+// Blacklisted heroes are sometimes active in a duel for a long time, not completing, not joining the lobby again. that blocks you from playing
+// can we 
+
+// showcase
+
+//process exit -bug 
+//blacklist
+// player active infinite if he closes - could lead to script stop
+//player active in more than one game? problem, derzeit not included, but warning gets thrown if there are more games
 
 
 
@@ -100,7 +113,7 @@ async function getPlayerDuelEntries(walletaddress) {
     // Open Duels in Lobby without a match, shows also Lobby ID
     //   function getPlayerDuelEntries(address _profile) view returns (tuple(uint256 id, address player, uint256[] heroes, uint256 startBlock, uint256 score, uint256 scoreAfter, uint256 jewelFee, uint256 duelId, uint256 custom1, uint256 custom2, uint8 duelType, uint8 status)[]);
     const getPlayerDuelEntries = await duelContract.getPlayerDuelEntries(walletaddress)
-    console.log('\n🔎 Checking Lobby for Address: ' + walletaddress)
+    console.log('\n🔎 Checking your Hero already waiting in the Lobby... ' + walletaddress)
     // console.log(getPlayerDuelEntries)
     // console.log('getPlayerDuelEntries: ' + getPlayerDuelEntries)
 
@@ -109,6 +122,13 @@ async function getPlayerDuelEntries(walletaddress) {
 
         let playerDuelEntries = getPlayerDuelEntries[0]
 
+        console.log(`
+        🙋‍♂️‍ Found your Hero in Lobby waiting for a Match:
+            Lobby ID: ${playerDuelEntries[0]} | Duel Type: ${playerDuelEntries[10]}
+            Hero IDs: ${playerDuelEntries[2]} | Score: ${playerDuelEntries[4]}
+            Background: ${playerDuelEntries[8]} | Stat: ${playerDuelEntries[9]}
+            `)
+        /*
         console.log(`
         🙋‍♂️‍ Found Hero in Lobby waiting for a Match:
             Lobby ID: ${playerDuelEntries[0]}
@@ -124,6 +144,7 @@ async function getPlayerDuelEntries(walletaddress) {
             Duel Type: ${playerDuelEntries[10]}
             Status: ${playerDuelEntries[11]}
             `)
+        */
         /*
         for (let index = 0; index < playerDuelEntries.length; index++) {
             console.log("index:" + index + ":")
@@ -133,7 +154,7 @@ async function getPlayerDuelEntries(walletaddress) {
         return playerDuelEntries[0]
     }
     else {
-        console.log('❌ No Active Lobby-Entries (Currently no Hero in Lobby-Queue)\n')
+        console.log('😴 Your Hero is not in the Lobby\n')
     }
 
 }
@@ -146,7 +167,7 @@ async function getActiveDuels(walletaddress) {
     // Active Duels = Ready to fight - Array is empty when no active duels (waiting for a match)
     //   function getActiveDuels(address _address) view returns (tuple(uint256 id, address player1, address player2, uint256 player1DuelEntry, uint256 player2DuelEntry, address winner, uint256[] player1Heroes, uint256[] player2Heroes, uint256 startBlock, uint8 duelType, uint8 status)[]);
     const getActiveDuels = await duelContract.getActiveDuels(walletaddress)
-    console.log('🔎 Checking Active Duels for Address: ' + walletaddress)
+    console.log('🔎 Checking your Wallet for Active Duels... ' + walletaddress)
     // console.log(getActiveDuels)
     // console.log('Active Duels: ' + getActiveDuels)
 
@@ -155,6 +176,13 @@ async function getActiveDuels(walletaddress) {
 
         let activeDuels = getActiveDuels[0]
 
+        console.log(`
+        🤼‍♂ Found Active Duel:
+            Duel ID: ${activeDuels[0]} | Duel Type: ${activeDuels[9]}
+            Player 1 Address: ${activeDuels[1]} | Player 2 Address: ${activeDuels[2]}
+            Player 1 Heroes: ${activeDuels[6]} | Player 2 Heroes: ${activeDuels[7]}
+            `)
+        /*
         console.log(`
         🤼‍♂ Found Active Duel:
             Duel ID: ${activeDuels[0]}
@@ -169,6 +197,7 @@ async function getActiveDuels(walletaddress) {
             Duel Type: ${activeDuels[9]}
             Status: ${activeDuels[10]}
         `)
+        */
         /*
         for (let index = 0; index < activeDuels.length; index++) {
             console.log("index:" + index + ":")
@@ -182,175 +211,187 @@ async function getActiveDuels(walletaddress) {
         }
     }
     else {
-        console.log('❌ No Active Duels (No Duels Ready for Battle / No Matches)\n')
+        console.log('😴 Your Hero is not in an Active Duel (No Duels Ready for Battle / No Matches)\n')
     }
 
 }
-
-
 
 
 // Function: FOR OPPONENTS: getActiveDuels (Matched in Lobby, but not completed)
 
 async function checkOpponentActivity(heroBlacklistIds) {
 
-    console.log('\n🏹 Checking if Blacklisted Heroes are playing your Game-Type ' + gameType + "vs" + gameType)
+    // If this takes too long, exit Script and Restart
 
-    let activeOpponentHeroes = []
+    const timeout = setTimeout(() => {
+        console.log("⌛ Transaction Timeout. (checkOpponentActivity)");
+        process.exit()
+    }, transaction_timeout * 1000)
 
-    const blacklistedOpponentWalletAddresses = await getAddressWithHeroID(blacklistedHeroIds) // Returns Array with Wallet-Addresses of blacklisted Hero-IDs
-    //console.log("blacklistedOpponentWalletAddresses: " + blacklistedOpponentWalletAddresses)
 
-    for (const blacklistedOpponentWalletAddress of blacklistedOpponentWalletAddresses) {
+    try {
 
-        console.log('\n🏹 Checking if Opponent is playing: ' + blacklistedOpponentWalletAddress)
+        console.log('\n🏹 Checking if Blacklisted Heroes are playing our Game-Type (' + gameType + "vs" + gameType + ")")
 
-        // Check for Opponents Active Duels
-        const getActiveDuels = await duelContract.getActiveDuels(blacklistedOpponentWalletAddress)
-        //console.log('🔎 Checking Active Duels of Opponent: ' + blacklistedOpponentWalletAddress)
+        let activeOpponentHeroes = []
 
-        // if array not empty = no active duel
-        if (getActiveDuels.length !== 0) {
+        const blacklistedOpponentWalletAddresses = await getAddressWithHeroID(heroBlacklistIds) // Returns Array with Wallet-Addresses of blacklisted Hero-IDs
+        //console.log("blacklistedOpponentWalletAddresses: " + blacklistedOpponentWalletAddresses)
 
-            let activeDuels = getActiveDuels[0]
-            /*
-            console.log(`
-            🚨 Found Opponent having an Active Duel:
-                Duel ID: ${activeDuels[0]}
-                Player 1 Address: ${activeDuels[1]}
-                Player 2 Address: ${activeDuels[2]}
-                Player 1 Lobby ID: ${activeDuels[3]}
-                Player 2 Lobby ID: ${activeDuels[4]}
-                Winner Address: ${activeDuels[5]}
-                Player 1 Heroes: ${activeDuels[6]}
-                Player 2 Heroes: ${activeDuels[7]}
-                StartBlock: ${activeDuels[8]}
-                Duel Type: ${activeDuels[9]}
-                Status: ${activeDuels[10]}
-            `)
-            */
+        for (const blacklistedOpponentWalletAddress of blacklistedOpponentWalletAddresses) {
 
-            // Add active Heroes to Array, if they play the same Game-Type as in our config.json
+            console.log('⚫ Checking if Blacklisted Hero is playing: ' + blacklistedOpponentWalletAddress)
 
-            if (activeDuels[9] === gameType) {
+            // Check for Opponents Active Duels
+            const getActiveDuels = await duelContract.getActiveDuels(blacklistedOpponentWalletAddress)
+            //console.log('🔎 Checking Active Duels of Opponent: ' + blacklistedOpponentWalletAddress)
 
-                blacklistedHeroIds.forEach(blacklistedID => {
+            // Check for Opponent in Lobby
+            const getPlayerDuelEntries = await duelContract.getPlayerDuelEntries(blacklistedOpponentWalletAddress)
+            //console.log('\n🔎 Checking Lobby for Opponent-Address: ' + blacklistedOpponentWalletAddress)
 
-                    //console.log(activeDuels[6])
-                    let activeDuels6 = [Number(activeDuels[6])]
-                    //console.log(activeDuels6)
-
-                    //console.log(activeDuels[7])
-                    let activeDuels7 = [Number(activeDuels[7])]
-                    //console.log(activeDuels6)
-
-                    activeDuels6.forEach(player1ID => {
-
-                        //console.log("player1ID", player1ID)
-
-                        if (blacklistedID === player1ID) {
-                            activeOpponentHeroes.push(player1ID)
-                            console.log('⚡ Hero is active in a Duel... Hero-ID: ' + player1ID)
-                        }
-                        else {
-                            //console.log('✔️  Opponent is Active in a Duel but not playing with a Blacklisted Hero-ID.')
-                        }
-                    });
-
-                    activeDuels7.forEach(player2ID => {
-
-                        //console.log("player2ID", player2ID)
-
-                        if (blacklistedID === player2ID) {
-                            activeOpponentHeroes.push(player2ID)
-                            console.log('⚡ Hero is active in a Duel. ID ' + player2ID)
-                        }
-                        else {
-                            //console.log('✔️  Opponent is Active in a Duel but not playing with a Blacklisted Hero-ID.')
-                        }
-                    });
-
-                });
-
+            if (getPlayerDuelEntries.length > 1) {     // if array greater than 1 = player has more than 1 active duels
+                console.log('⚠️⚠️⚠️⚠️ Opponent has more than ONE Active Lobby at the same time ⚠️⚠️⚠️⚠️' + blacklistedOpponentWalletAddress)
+                console.log('⚠️⚠️⚠️⚠️ This Script cannot guarantee considering this Blacklisted Hero-ID correctly - not implemented yet ⚠️⚠️⚠️⚠️')
             }
 
-        }
-        else {
-            console.log('✔️  Opponent has no Active Duels.')
-        }
+            if (getPlayerDuelEntries.length !== 0) {     // if array not empty = no active duel
+
+                let playerDuelEntries = getPlayerDuelEntries[0]
+                /*
+                console.log(`
+                        🚨 Found Opponent waiting in the Lobby:
+                        Lobby ID: ${playerDuelEntries[0]}
+                        Player Address: ${playerDuelEntries[1]}
+                        Hero IDs: ${playerDuelEntries[2]}
+                        StartBlock: ${playerDuelEntries[3]}
+                        Score: ${playerDuelEntries[4]}
+                        Score After: ${playerDuelEntries[5]}
+                        JewelFee: ${playerDuelEntries[6]}
+                        Duel ID: ${playerDuelEntries[7]}
+                        Background: ${playerDuelEntries[8]}
+                        Stat: ${playerDuelEntries[9]}
+                        Duel Type: ${playerDuelEntries[10]}
+                        Status: ${playerDuelEntries[11]}
+                        `)
+                */
+
+                // Add active Heroes to Array, if they play the same Game-Type as in our config.json
+
+                if (playerDuelEntries[10] === gameType) {
+
+                    heroBlacklistIds.forEach(blacklistedID => {
+
+                        let playerDuelEntries2 = [Number(playerDuelEntries[2])]
+
+                        playerDuelEntries2.forEach(player1ID => {
+                            if (blacklistedID === player1ID) {
+                                activeOpponentHeroes.push(player1ID)
+                                console.log('  ⚡ Hero is active in a Duel. ID ' + player1ID)
+                            }
+                            else {
+                                //console.log('  ✔️  Opponent is the Lobby but not playing with a Blacklisted Hero-ID.')
+                            }
+                        });
+                    });
+                }
+            }
+            else {
+                //console.log('  ✔️  Blacklisted Hero is not in the Lobby')
+            }
 
 
-        // Check for Opponent in Lobby
-        const getPlayerDuelEntries = await duelContract.getPlayerDuelEntries(blacklistedOpponentWalletAddress)
-        //console.log('\n🔎 Checking Lobby for Opponent-Address: ' + blacklistedOpponentWalletAddress)
+            if (!blacklistLobbyOnly) {                 // If blacklistLobbyOnly is activated (true)
 
-        // if array not empty = no active duel
-        if (getPlayerDuelEntries.length !== 0) {
+                if (getActiveDuels.length > 1) {     // if array greater than 1 = player has more than 1 active lobby
+                    console.log('⚠️⚠️⚠️⚠️ Opponent has more than ONE Active Duel at the same time ⚠️⚠️⚠️⚠️' + blacklistedOpponentWalletAddress)
+                    console.log('⚠️⚠️⚠️⚠️ This Script cannot guarantee considering this Blacklisted Hero-ID correctly - not implemented yet ⚠️⚠️⚠️⚠️')
+                }
 
-            let playerDuelEntries = getPlayerDuelEntries[0]
-            /*
-            console.log(`
-                    🚨 Found Opponent waiting in the Lobby:
-                    Lobby ID: ${playerDuelEntries[0]}
-                    Player Address: ${playerDuelEntries[1]}
-                    Hero IDs: ${playerDuelEntries[2]}
-                    StartBlock: ${playerDuelEntries[3]}
-                    Score: ${playerDuelEntries[4]}
-                    Score After: ${playerDuelEntries[5]}
-                    JewelFee: ${playerDuelEntries[6]}
-                    Duel ID: ${playerDuelEntries[7]}
-                    Background: ${playerDuelEntries[8]}
-                    Stat: ${playerDuelEntries[9]}
-                    Duel Type: ${playerDuelEntries[10]}
-                    Status: ${playerDuelEntries[11]}
+                if (getActiveDuels.length !== 0) {     // if array not empty = no active duel
+
+                    let activeDuels = getActiveDuels[0]
+                    /*
+                    console.log(`
+                    🚨 Found Opponent having an Active Duel:
+                        Duel ID: ${activeDuels[0]}
+                        Player 1 Address: ${activeDuels[1]}
+                        Player 2 Address: ${activeDuels[2]}
+                        Player 1 Lobby ID: ${activeDuels[3]}
+                        Player 2 Lobby ID: ${activeDuels[4]}
+                        Winner Address: ${activeDuels[5]}
+                        Player 1 Heroes: ${activeDuels[6]}
+                        Player 2 Heroes: ${activeDuels[7]}
+                        StartBlock: ${activeDuels[8]}
+                        Duel Type: ${activeDuels[9]}
+                        Status: ${activeDuels[10]}
                     `)
-            */
+                    */
 
-            // Add active Heroes to Array, if they play the same Game-Type as in our config.json
+                    // Add active Heroes to Array, if they play the same Game-Type as in our config.json
 
-            if (playerDuelEntries[10] === gameType) {
+                    if (activeDuels[9] === gameType) {
 
-                blacklistedHeroIds.forEach(blacklistedID => {
+                        heroBlacklistIds.forEach(blacklistedID => {
 
-                    let playerDuelEntries2 = [Number(playerDuelEntries[2])]
+                            let activeDuels6 = [Number(activeDuels[6])]
+                            let activeDuels7 = [Number(activeDuels[7])]
 
-                    playerDuelEntries2.forEach(player1ID => {
-                        if (blacklistedID === player1ID) {
-                            activeOpponentHeroes.push(player1ID)
-                            console.log('⚡ Hero is active in a Duel. ID ' + player1ID)
-                        }
-                        else {
-                            //console.log('✔️  Opponent is the Lobby but not playing with a Blacklisted Hero-ID.')
-                        }
-                    });
+                            activeDuels6.forEach(player1ID => {
 
-                });
+                                if (blacklistedID === player1ID) {
+                                    activeOpponentHeroes.push(player1ID)
+                                    console.log('  ⚡ Hero is active in a Duel... Hero-ID: ' + blacklistedID)
+                                }
+                                else {
+                                    //console.log('  ✔️  Opponent is Active in a Duel but not playing with a Blacklisted Hero-ID.')
+                                }
+                            });
 
+                            activeDuels7.forEach(player2ID => {
+
+                                if (blacklistedID === player2ID) {
+                                    activeOpponentHeroes.push(player2ID)
+                                    console.log('  ⚡ Hero is active in a Duel. ID ' + blacklistedID)
+                                }
+                                else {
+                                    //console.log('  ✔️  Opponent is Active in a Duel but not playing with a Blacklisted Hero-ID.')
+                                }
+                            });
+                        });
+                    }
+                }
+                else {
+                    //console.log('  ✔️  Blacklisted Hero has no Active Duel.')
+                }
             }
+        }
 
+        clearTimeout(timeout);
+
+        if (activeOpponentHeroes.length !== 0) {
+            console.log('\n🚨 Active Blacklisted Heroes: ' + activeOpponentHeroes + '\n')
+
+            return {
+                foundOpponentActive: true,
+                activeHeroes: activeOpponentHeroes,
+                gameType: gameType
+            }
         }
         else {
-            console.log('✔️  Opponent is not in the Lobby.\n')
+            return {
+                foundOpponentActive: false,
+                activeHeroes: activeOpponentHeroes,
+                gameType: gameType
+            }
         }
 
-    }
+    } catch (error) {
+        clearTimeout(timeout);
 
+        console.log("❌ Error checking Blacklisted Heroes.\n");
+        consoleCountdown(waitTimeAfterError, "Let's try again", 'restart')
 
-    if (activeOpponentHeroes.length !== 0) {
-        console.log('\n🚨 Active Blacklisted Heroes: ' + activeOpponentHeroes + '\n')
-
-        return {
-            foundOpponentActive: true,
-            activeHeroes: activeOpponentHeroes,
-            gameType: gameType
-        }
-    }
-    else {
-        return {
-            foundOpponentActive: false,
-            activeHeroes: activeOpponentHeroes,
-            gameType: gameType
-        }
     }
 
 }
@@ -447,25 +488,31 @@ async function start() {
 
 
         // If Hero-Blacklist is activated, check for blacklisted Heroes and only play, if no Opponent is active
+        // Only works for GameType "1"
 
-        if (activateBlacklistedHeroIds) {
+        if (activateBlacklistedHeroIds && gameType === 1) {
 
             // Check for Opponents in our GameType in config.json
             let checkOpponent = await checkOpponentActivity(blacklistedHeroIds)
             //console.log("checkOpponent", checkOpponent)
 
+
+            if (checkOpponent === undefined) {
+                console.log("❌ Couldn't check for Blacklisted Heroes.")
+            }
+
             if (checkOpponent.foundOpponentActive) {
-                consoleCountdown(waitTimeLobby, "Blacklisted Hero is currently playing... let's wait and try again...", 'restart')
+                consoleCountdown(waitTimeBlacklist, "Blacklisted Hero is currently playing... let's wait and try again...", 'restart')
             }
             else {
-                console.log("✔️  No Blacklisted Hero found, let's go on!");
+                console.log("\n🟢 No Blacklisted Hero found, let's go on!\n");
 
                 // Check the Lobby for pending Duels
                 pendingHeroInLobby = await getPlayerDuelEntries(config.wallet.address)
 
                 // If our Hero is not in Lobby, send Hero to Lobby
                 if (pendingHeroInLobby === undefined) {
-                    //sendToDuel();   // Getting ready
+                    sendToDuel();   // Getting ready
                 }
                 else {  // Hero is already in Lobby, so we wait till Match is completed
                     consoleCountdown(waitTimeLobby, "Hero is already in Lobby waiting for a Match, let's wait...", 'restart')
@@ -479,7 +526,7 @@ async function start() {
 
             // If our Hero is not in Lobby, send Hero to Lobby
             if (pendingHeroInLobby === undefined) {
-                //sendToDuel();   // Getting ready
+                sendToDuel();   // Getting ready
             }
             else {  // Hero is already in Lobby, so we wait till Match is completed
                 consoleCountdown(waitTimeLobby, "Hero is already in Lobby waiting for a Match, let's wait...", 'restart')
@@ -489,7 +536,7 @@ async function start() {
 
     } catch (err) {
 
-        console.error(`Network Error: Unable to run: ${err.message}`);
+        console.error(`❌ Network Error: Unable to run: ${err.message}`);
 
         /* Try again */
         consoleCountdown(waitTimeAfterError, "Let's try again", 'restart')
@@ -624,7 +671,7 @@ async function tryTransactionAutocompleteDuel(transaction) {
 
     const timeout = setTimeout(() => {
         console.log("⌛ Transaction Timeout. (tryTransactionAutocompleteDuel)");
-        //process.exit()
+        process.exit()
     }, transaction_timeout * 1000)
 
 

@@ -21,7 +21,8 @@
         "waitTimeAfterTXFail": 10,
         "transaction_timeout": 70,
         "waitTimeLobby": 10,
-        "waitBlockTimeToAutocomplete": 1
+        "waitBlockTimeToAutocomplete": 100,
+        "waitTimeBlacklist": 20
     },
     "game": {
         "gameType": 1,
@@ -36,8 +37,11 @@
     "blacklist": {
         "heroBlacklistIds": [
             193398,
-            83208
+            83208,
+            76568,
+            254694
         ],
-        "blacklistActive": true
+        "blacklistActive": true,
+        "blacklistLobbyOnly": false
     }
 }
