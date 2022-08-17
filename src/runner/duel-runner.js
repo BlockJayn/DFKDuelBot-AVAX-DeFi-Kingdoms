@@ -54,6 +54,13 @@ const waitTimeBlacklist = config.timers.waitTimeBlacklist                       
 /*****************************************************************/
 
 
+// Notes for Blacklist - ToDo:
+// Blacklisted heroes are sometimes active in a duel for a long time, not completing, not joining the lobby again. that blocks us from playing.
+// Could be a Problem
+
+
+
+
 // Function: getAddressWithHeroID via DFK-API
 
 async function getAddressWithHeroID(blacklistedHeroIdsArray) {
