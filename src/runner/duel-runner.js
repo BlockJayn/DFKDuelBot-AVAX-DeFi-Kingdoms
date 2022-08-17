@@ -54,19 +54,6 @@ const waitTimeBlacklist = config.timers.waitTimeBlacklist                       
 /*****************************************************************/
 
 
-// TO DO
-// Blacklisted heroes are sometimes active in a duel for a long time, not completing, not joining the lobby again. that blocks you from playing
-// can we 
-
-// showcase
-
-//process exit -bug 
-//blacklist
-// player active infinite if he closes - could lead to script stop
-//player active in more than one game? problem, derzeit not included, but warning gets thrown if there are more games
-
-
-
 // Function: getAddressWithHeroID via DFK-API
 
 async function getAddressWithHeroID(blacklistedHeroIdsArray) {
