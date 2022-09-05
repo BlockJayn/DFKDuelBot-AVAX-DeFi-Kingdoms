@@ -31,6 +31,10 @@
         ],
         "background": 4,
         "stat": 8,
+        "fallbackHeroid": 76543,
+        "fallbackBackground": 1,
+        "fallbackStat": 2,
+        "useFallbackHero": true,
         "activateAutoCompleteDuel": true,
         "jewelfee": "0x016345785d8a0000"
     },

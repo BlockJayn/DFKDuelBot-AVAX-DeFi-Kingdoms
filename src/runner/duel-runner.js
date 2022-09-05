@@ -32,11 +32,15 @@ let start_rpc = config.rpc.harmonyRpc               // Start with Main-RPC
 
 // Hero & Game Data
 const seedPassword = config.wallet.seedPassword                             //  Password for encrypting your seedphrase
-const gameType = config.game.gameType                                           //  Duel Game-Type = 1, 3 or 9
+const gameType = config.game.gameType                                       //  Duel Game-Type = 1, 3 or 9
 const heroid = config.game.heroid                                           //  Duel Hero ID(s), like [ '260714', '154849', '30932' ]
+const fallbackHeroid = config.game.fallbackHeroid                           //  Duel Hero ID(s), like [ '260714', '154849', '30932' ]
 const jewelfee = config.game.jewelfee                                       //  Duel Jewel-Fee in HEX = 100000000000000000
 const background = config.game.background                                   //  Duel Background
 const stat = config.game.stat                                               //  Duel Stat
+const fallbackBackground = config.game.fallbackBackground                   //  Duel Background
+const fallbackStat = config.game.fallbackStat                               //  Duel Stat
+const useFallbackHero = config.game.useFallbackHero;                        //  
 const activateAutoCompleteDuel = config.game.activateAutoCompleteDuel       //  Automatically Completes Duels
 const activateBlacklistedHeroIds = config.blacklist.blacklistActive         //  Don't join Lobby when blacklisted Hero is in Lobby or Active Game, only works for Game-Type "1", Blacklist gets ignored in other game-types
 const blacklistedHeroIds = config.blacklist.heroBlacklistIds                //  Array with blacklisted Hero IDs
@@ -57,8 +61,6 @@ const waitTimeBlacklist = config.timers.waitTimeBlacklist                       
 // Notes for Blacklist - ToDo:
 // Blacklisted heroes are sometimes active in a duel for a long time, not completing, not joining the lobby again. that blocks us from playing.
 // Could be a Problem
-
-
 
 
 // Function: getAddressWithHeroID via DFK-API
@@ -496,7 +498,24 @@ async function start() {
             }
 
             if (checkOpponent.foundOpponentActive) {
-                consoleCountdown(waitTimeBlacklist, "Blacklisted Hero is currently playing... let's wait and try again...", 'restart')
+
+                if (useFallbackHero) {
+                    console.log("\n🟢 Blacklisted Hero found, let's go on with your Fallback-Hero!\n");
+
+                    // Check the Lobby for pending Duels
+                    pendingHeroInLobby = await getPlayerDuelEntries(config.wallet.address)
+
+                    // If our Hero is not in Lobby, send Hero to Lobby
+                    if (pendingHeroInLobby === undefined) {
+                        sendToDuel();   // Getting ready
+                    }
+                    else {  // Hero is already in Lobby, so we wait till Match is completed
+                        consoleCountdown(waitTimeLobby, "Hero is already in Lobby waiting for a Match, let's wait...", 'restart')
+                    }
+                }
+                else {
+                    consoleCountdown(waitTimeBlacklist, "Blacklisted Hero is currently playing... let's wait and try again...", 'restart')
+                }
             }
             else {
                 console.log("\n🟢 No Blacklisted Hero found, let's go on!\n");
@@ -703,19 +722,37 @@ async function sendToDuel() {
     const herodata = await getHeroMetaData(heroid[0]);   // console.log(herodata)
 
     try {
-        console.log(`⚔️  Sending ${herodata.firstname_string} ${herodata.lastname_string} to Duel-Lobby...\n`);
 
-        await tryTransaction(
-            duelContract
-                .connect(wallet)
-                .enterDuelLobby(
-                    gameType,
-                    heroid,
-                    jewelfee,
-                    background,
-                    stat
-                )
-        )
+        if (checkOpponent) {
+            console.log(`⚔️  Sending Fallback-Hero ${herodata.firstname_string} ${herodata.lastname_string} to Duel-Lobby...\n`);
+
+            await tryTransaction(
+                duelContract
+                    .connect(wallet)
+                    .enterDuelLobby(
+                        gameType,
+                        fallbackHeroid,
+                        jewelfee,
+                        fallbackBackground,
+                        fallbackStat
+                    )
+            )
+        }
+        else {
+            console.log(`⚔️  Sending ${herodata.firstname_string} ${herodata.lastname_string} to Duel-Lobby...\n`);
+
+            await tryTransaction(
+                duelContract
+                    .connect(wallet)
+                    .enterDuelLobby(
+                        gameType,
+                        heroid,
+                        jewelfee,
+                        background,
+                        stat
+                    )
+            )
+        }
 
     } catch (err) {
 
