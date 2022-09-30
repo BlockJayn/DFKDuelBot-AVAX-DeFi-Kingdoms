@@ -27,8 +27,8 @@ const gql = require("graphql-request").gql;
 const url = 'https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql'
 
 // RPC - switch automatically between harmonyRpc & poktRpc
-let rpc_auto_switch = config.rpc.rpc_auto_switch    // true: switch network on errors automatically | false: take standard settings from config
-let start_rpc = config.rpc.harmonyRpc               // Start with Main-RPC
+let rpc_auto_switch = config.rpc.rpc_auto_switch                                        // true: switch network on errors automatically | false: take standard settings from config
+let start_rpc = config.rpc.useAvaxChain ? config.rpc.avaxRpc : config.rpc.harmonyRpc    // Start with Main-RPC
 
 // Hero & Game Data
 const seedPassword = config.wallet.seedPassword                             //  Password for encrypting your seedphrase
@@ -61,7 +61,6 @@ const waitTimeBlacklist = config.timers.waitTimeBlacklist                       
 // Notes for Blacklist - ToDo:
 // Blacklisted heroes are sometimes active in a duel for a long time, not completing, not joining the lobby again. that blocks us from playing.
 // Could be a Problem
-
 
 // Function: getAddressWithHeroID via DFK-API
 
@@ -410,16 +409,16 @@ function getRpc() {
         }
         else {
 
-            if (current_rpc === config.rpc.harmonyRpc) {
-                current_rpc = config.rpc.poktRpc;
+            if (current_rpc === config.rpc.useAvaxChain ? config.rpc.avaxRpc : config.rpc.harmonyRpc) {
+                current_rpc = config.rpc.useAvaxChain ? config.rpc.avaxRpcBackup : config.rpc.poktRpc;
                 console.log('-----------------------------------------------------\n')
-                console.log('🔀 Switching to Backup-Network: ' + config.rpc.poktRpc + '\n')
+                console.log('🔀 Switching to Backup-Network: ' + config.rpc.useAvaxChain ? config.rpc.avaxRpcBackup : config.rpc.poktRpc + '\n')
                 return current_rpc
             }
             else {
-                current_rpc = config.rpc.harmonyRpc;
+                current_rpc = config.rpc.useAvaxChain ? config.rpc.avaxRpc : config.rpc.harmonyRpc;
                 console.log('-----------------------------------------------------\n')
-                console.log('🔀 Switching to Mainnet: ' + config.rpc.harmonyRpc + '\n')
+                console.log('🔀 Switching to Mainnet: ' + config.rpc.useAvaxChain ? config.rpc.avaxRpc : config.rpc.harmonyRpc + '\n')
                 return current_rpc
             }
         }
@@ -427,7 +426,15 @@ function getRpc() {
     }
     else {  // use standard settings from config-file
 
-        let standardNet = config.rpc.useBackupRpc ? config.rpc.poktRpc : config.rpc.harmonyRpc;
+        let standardNet;
+
+        if (config.rpc.useBackupRpc) {
+            standardNet = config.rpc.useAvaxChain ? config.rpc.avaxRpcBackup : config.rpc.poktRpc
+        }
+        else {
+            standardNet = config.rpc.useAvaxChain ? config.rpc.avaxRpc : config.rpc.harmonyRpc
+        }
+
         console.log('-----------------------------------------------------')
         console.log('🌐 Using Network: ' + standardNet + '\n')
 
@@ -452,7 +459,7 @@ async function start() {
         provider = new ethers.providers.JsonRpcProvider(getRpc());
 
         duelContract = new ethers.Contract(
-            config.duelContract,
+            config.rpc.useAvaxChain ? config.duelContractAvax : config.duelContract,
             abiduel,
             provider
         );
