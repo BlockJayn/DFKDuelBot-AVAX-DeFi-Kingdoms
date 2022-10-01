@@ -1,3 +1,5 @@
+DFK-Duels are currently not active on AVAX - I'll update this respository as soon as the Duel-Feature goes live on AVAX.
+
 # DFKDuelRunner
 
 ## What can this Bot do?
