@@ -4,14 +4,10 @@
     "encryptedWalletPath": "./w.json",
     "seedPassword": "REPLACE WITH YOUR SEED PASSWORD"
   },
-  "duelContract": "0xE97196f4011dc9DA0829dd8E151EcFc0f37EE3c7",
-  "duelContractAvax": "0xE97196f4011dc9DA0829dd8E151EcFc0f37EE3c7",
+  "duelContract": "0xf724FE22b45D519D149477aA2eC5348Cee08Cae3",
   "rpc": {
     "rpc_auto_switch": true,
-    "useBackupRpc": false,
-    "harmonyRpc": "https://api.harmony.one",
-    "poktRpc": "https://harmony-0-rpc.gateway.pokt.network",
-    "useAvaxChain": true,
+    "useBackupRpc": true,
     "avaxRpc": "https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc",
     "avaxRpcBackup": "https://avax-dfk.gateway.pokt.network/v1/lb/6244818c00b9f0003ad1b619/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc"
   },
@@ -33,16 +29,16 @@
     "heroid": [76543],
     "background": 4,
     "stat": 8,
-    "fallbackHeroid": 76543,
+    "fallbackHeroid": [87654],
     "fallbackBackground": 1,
     "fallbackStat": 2,
-    "useFallbackHero": true,
+    "useFallbackHero": false,
     "activateAutoCompleteDuel": true,
     "jewelfee": "0x016345785d8a0000"
   },
   "blacklist": {
-    "heroBlacklistIds": [193398, 83208, 76568, 254694],
-    "blacklistActive": true,
+    "heroBlacklistIds": [98765, 65432],
+    "blacklistActive": false,
     "blacklistLobbyOnly": false
   }
 }

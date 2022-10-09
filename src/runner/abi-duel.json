@@ -97,6 +97,205 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_type",
+        "type": "uint256"
+      }
+    ],
+    "name": "resetScore",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_blocks",
+        "type": "uint16"
+      }
+    ],
+    "name": "setDuelCompleteBlocks",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setGoldPot",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "_lose",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_win",
+        "type": "uint64"
+      }
+    ],
+    "name": "setLoseWinThresholds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_limit",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMatchLimit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "_access",
+        "type": "bool"
+      }
+    ],
+    "name": "setMatchMaker",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lobby",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_threshold",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMatchThreshold",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "_access",
+        "type": "bool"
+      }
+    ],
+    "name": "setModerator",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_open",
+        "type": "bool"
+      }
+    ],
+    "name": "setOpenMatchmaking",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_statScienceAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setStatScienceAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_threshold",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTimeoutThreshold",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lobby",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "_allowed",
+        "type": "bool"
+      }
+    ],
+    "name": "setTypeAllowed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "result",
+        "type": "uint256"
+      }
+    ],
+    "name": "RandomEvent",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "_duelId",
         "type": "uint256"
@@ -121,7 +320,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_jewelFee",
+        "name": "_tokenFee",
         "type": "uint256"
       },
       {
@@ -217,10 +416,52 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "duelId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint16",
+                "name": "base",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "streakBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint16",
+                "name": "miscBonus",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "diffBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreBefore",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreAfter",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct IDuelS1Types.PlayerScoreChange",
+            "name": "player1ScoreChange",
+            "type": "tuple"
           }
         ],
         "indexed": false,
-        "internalType": "struct IDuelTypes.Duel",
+        "internalType": "struct IDuelS1Types.Duel",
         "name": "duel",
         "type": "tuple"
       }
@@ -305,10 +546,52 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "duelId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint16",
+                "name": "base",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "streakBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint16",
+                "name": "miscBonus",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "diffBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreBefore",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreAfter",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct IDuelS1Types.PlayerScoreChange",
+            "name": "player1ScoreChange",
+            "type": "tuple"
           }
         ],
         "indexed": false,
-        "internalType": "struct IDuelTypes.Duel",
+        "internalType": "struct IDuelS1Types.Duel",
         "name": "duel",
         "type": "tuple"
       }
@@ -370,6 +653,68 @@
       }
     ],
     "name": "DuelEntryMatched",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "duelId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "player",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "duelId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint16",
+            "name": "base",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint32",
+            "name": "streakBonus",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint16",
+            "name": "miscBonus",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint32",
+            "name": "diffBonus",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint64",
+            "name": "scoreBefore",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "scoreAfter",
+            "type": "uint64"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct IDuelS1Types.PlayerScoreChange",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "name": "PlayerScoreChanged",
     "type": "event"
   },
   {
@@ -448,7 +793,7 @@
                 "type": "uint16"
               }
             ],
-            "internalType": "struct IDuelTypes.HeroTurnScore",
+            "internalType": "struct IDuelS1Types.HeroTurnScore",
             "name": "hero1Score",
             "type": "tuple"
           },
@@ -480,7 +825,7 @@
                 "type": "uint16"
               }
             ],
-            "internalType": "struct IDuelTypes.HeroTurnScore",
+            "internalType": "struct IDuelS1Types.HeroTurnScore",
             "name": "hero2Score",
             "type": "tuple"
           },
@@ -496,7 +841,7 @@
           }
         ],
         "indexed": false,
-        "internalType": "struct IDuelTypes.TurnResult",
+        "internalType": "struct IDuelS1Types.TurnResult",
         "name": "turnResult",
         "type": "tuple"
       }
@@ -570,9 +915,51 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "duelId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint16",
+                "name": "base",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "streakBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint16",
+                "name": "miscBonus",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "diffBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreBefore",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreAfter",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct IDuelS1Types.PlayerScoreChange",
+            "name": "player1ScoreChange",
+            "type": "tuple"
           }
         ],
-        "internalType": "struct IDuelTypes.Duel[]",
+        "internalType": "struct IDuelS1Types.Duel[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -646,11 +1033,72 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "duelId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint16",
+                "name": "base",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "streakBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint16",
+                "name": "miscBonus",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "diffBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreBefore",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreAfter",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct IDuelS1Types.PlayerScoreChange",
+            "name": "player1ScoreChange",
+            "type": "tuple"
           }
         ],
-        "internalType": "struct IDuelTypes.Duel[]",
+        "internalType": "struct IDuelS1Types.Duel[]",
         "name": "",
         "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_heroId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCurrentHeroScoreDuelId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -722,9 +1170,51 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "duelId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint16",
+                "name": "base",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "streakBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint16",
+                "name": "miscBonus",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "diffBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreBefore",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreAfter",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct IDuelS1Types.PlayerScoreChange",
+            "name": "player1ScoreChange",
+            "type": "tuple"
           }
         ],
-        "internalType": "struct IDuelTypes.Duel",
+        "internalType": "struct IDuelS1Types.Duel",
         "name": "",
         "type": "tuple"
       }
@@ -766,6 +1256,11 @@
           },
           {
             "internalType": "uint256",
+            "name": "heroPower",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
             "name": "score",
             "type": "uint256"
           },
@@ -776,7 +1271,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "jewelFee",
+            "name": "tokenFee",
             "type": "uint256"
           },
           {
@@ -803,9 +1298,19 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "internalType": "uint64",
+            "name": "winStreak",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "loseStreak",
+            "type": "uint64"
           }
         ],
-        "internalType": "struct IDuelTypes.DuelEntry",
+        "internalType": "struct IDuelS1Types.DuelEntry",
         "name": "",
         "type": "tuple"
       }
@@ -879,9 +1384,51 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "duelId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint16",
+                "name": "base",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "streakBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint16",
+                "name": "miscBonus",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "diffBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreBefore",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreAfter",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct IDuelS1Types.PlayerScoreChange",
+            "name": "player1ScoreChange",
+            "type": "tuple"
           }
         ],
-        "internalType": "struct IDuelTypes.Duel[100]",
+        "internalType": "struct IDuelS1Types.Duel[100]",
         "name": "",
         "type": "tuple[100]"
       }
@@ -936,7 +1483,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct IDuelTypes.DuelReward[]",
+        "internalType": "struct IDuelS1Types.DuelReward[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -1009,7 +1556,7 @@
                 "type": "uint16"
               }
             ],
-            "internalType": "struct IDuelTypes.HeroTurnScore",
+            "internalType": "struct IDuelS1Types.HeroTurnScore",
             "name": "hero1Score",
             "type": "tuple"
           },
@@ -1041,7 +1588,7 @@
                 "type": "uint16"
               }
             ],
-            "internalType": "struct IDuelTypes.HeroTurnScore",
+            "internalType": "struct IDuelS1Types.HeroTurnScore",
             "name": "hero2Score",
             "type": "tuple"
           },
@@ -1056,7 +1603,7 @@
             "type": "address"
           }
         ],
-        "internalType": "struct IDuelTypes.TurnResult[]",
+        "internalType": "struct IDuelS1Types.TurnResult[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -1130,9 +1677,51 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "duelId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint16",
+                "name": "base",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "streakBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint16",
+                "name": "miscBonus",
+                "type": "uint16"
+              },
+              {
+                "internalType": "uint32",
+                "name": "diffBonus",
+                "type": "uint32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreBefore",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "scoreAfter",
+                "type": "uint64"
+              }
+            ],
+            "internalType": "struct IDuelS1Types.PlayerScoreChange",
+            "name": "player1ScoreChange",
+            "type": "tuple"
           }
         ],
-        "internalType": "struct IDuelTypes.Duel",
+        "internalType": "struct IDuelS1Types.Duel",
         "name": "",
         "type": "tuple"
       }
@@ -1141,7 +1730,109 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_heroId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getHeroDuelEntry",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "player",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "heroes",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "heroPower",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "score",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "scoreAfter",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "duelId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "custom1",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "custom2",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint8",
+            "name": "duelType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint64",
+            "name": "winStreak",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "loseStreak",
+            "type": "uint64"
+          }
+        ],
+        "internalType": "struct IDuelS1Types.DuelEntry",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_type",
+        "type": "uint256"
+      }
+    ],
     "name": "getHighestScore",
     "outputs": [
       {
@@ -1187,6 +1878,11 @@
           },
           {
             "internalType": "uint256",
+            "name": "heroPower",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
             "name": "score",
             "type": "uint256"
           },
@@ -1197,7 +1893,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "jewelFee",
+            "name": "tokenFee",
             "type": "uint256"
           },
           {
@@ -1224,9 +1920,19 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "internalType": "uint64",
+            "name": "winStreak",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "loseStreak",
+            "type": "uint64"
           }
         ],
-        "internalType": "struct IDuelTypes.DuelEntry[]",
+        "internalType": "struct IDuelS1Types.DuelEntry[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -1240,6 +1946,11 @@
         "internalType": "address",
         "name": "_profile",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_type",
+        "type": "uint256"
       }
     ],
     "name": "getPlayerScore",
@@ -1292,6 +2003,11 @@
           },
           {
             "internalType": "uint256",
+            "name": "heroPower",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
             "name": "score",
             "type": "uint256"
           },
@@ -1302,7 +2018,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "jewelFee",
+            "name": "tokenFee",
             "type": "uint256"
           },
           {
@@ -1329,9 +2045,19 @@
             "internalType": "uint8",
             "name": "status",
             "type": "uint8"
+          },
+          {
+            "internalType": "uint64",
+            "name": "winStreak",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "loseStreak",
+            "type": "uint64"
           }
         ],
-        "internalType": "struct IDuelTypes.DuelEntry",
+        "internalType": "struct IDuelS1Types.DuelEntry",
         "name": "",
         "type": "tuple"
       }
@@ -1390,6 +2116,11 @@
         "internalType": "address",
         "name": "_profile",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_type",
+        "type": "uint256"
       }
     ],
     "name": "getTotalPlayerDuels",
@@ -1409,6 +2140,11 @@
         "internalType": "address",
         "name": "_profile",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_type",
+        "type": "uint256"
       }
     ],
     "name": "getTotalPlayerWins",
@@ -1425,818 +2161,22 @@
   {
     "inputs": [
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "summonedTime",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "nextSummonTime",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "summonerId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "assistantId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint32",
-                "name": "summons",
-                "type": "uint32"
-              },
-              {
-                "internalType": "uint32",
-                "name": "maxSummons",
-                "type": "uint32"
-              }
-            ],
-            "internalType": "struct IHeroTypes.SummoningInfo",
-            "name": "summoningInfo",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "statGenes",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "visualGenes",
-                "type": "uint256"
-              },
-              {
-                "internalType": "enum IHeroTypes.Rarity",
-                "name": "rarity",
-                "type": "uint8"
-              },
-              {
-                "internalType": "bool",
-                "name": "shiny",
-                "type": "bool"
-              },
-              {
-                "internalType": "uint16",
-                "name": "generation",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint32",
-                "name": "firstName",
-                "type": "uint32"
-              },
-              {
-                "internalType": "uint32",
-                "name": "lastName",
-                "type": "uint32"
-              },
-              {
-                "internalType": "uint8",
-                "name": "shinyStyle",
-                "type": "uint8"
-              },
-              {
-                "internalType": "uint8",
-                "name": "class",
-                "type": "uint8"
-              },
-              {
-                "internalType": "uint8",
-                "name": "subClass",
-                "type": "uint8"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroInfo",
-            "name": "info",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "staminaFullAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "hpFullAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "mpFullAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint16",
-                "name": "level",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint64",
-                "name": "xp",
-                "type": "uint64"
-              },
-              {
-                "internalType": "address",
-                "name": "currentQuest",
-                "type": "address"
-              },
-              {
-                "internalType": "uint8",
-                "name": "sp",
-                "type": "uint8"
-              },
-              {
-                "internalType": "enum IHeroTypes.HeroStatus",
-                "name": "status",
-                "type": "uint8"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroState",
-            "name": "state",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "strength",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "intelligence",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "wisdom",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "luck",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "agility",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "vitality",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "endurance",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "dexterity",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hp",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mp",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "stamina",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroStats",
-            "name": "stats",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "strength",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "intelligence",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "wisdom",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "luck",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "agility",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "vitality",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "endurance",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "dexterity",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpLg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpLg",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroStatGrowth",
-            "name": "primaryStatGrowth",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "strength",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "intelligence",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "wisdom",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "luck",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "agility",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "vitality",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "endurance",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "dexterity",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpLg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpLg",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroStatGrowth",
-            "name": "secondaryStatGrowth",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "mining",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "gardening",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "foraging",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "fishing",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroProfessions",
-            "name": "professions",
-            "type": "tuple"
-          }
-        ],
-        "internalType": "struct IHeroTypes.Hero",
-        "name": "_hero",
-        "type": "tuple"
+        "internalType": "address",
+        "name": "_player",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_type",
+        "type": "uint256"
       }
     ],
-    "name": "_heroMMScore",
+    "name": "getWinStreaks",
     "outputs": [
       {
-        "internalType": "uint64",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint64"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "summonedTime",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "nextSummonTime",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "summonerId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "assistantId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint32",
-                "name": "summons",
-                "type": "uint32"
-              },
-              {
-                "internalType": "uint32",
-                "name": "maxSummons",
-                "type": "uint32"
-              }
-            ],
-            "internalType": "struct IHeroTypes.SummoningInfo",
-            "name": "summoningInfo",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "statGenes",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "visualGenes",
-                "type": "uint256"
-              },
-              {
-                "internalType": "enum IHeroTypes.Rarity",
-                "name": "rarity",
-                "type": "uint8"
-              },
-              {
-                "internalType": "bool",
-                "name": "shiny",
-                "type": "bool"
-              },
-              {
-                "internalType": "uint16",
-                "name": "generation",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint32",
-                "name": "firstName",
-                "type": "uint32"
-              },
-              {
-                "internalType": "uint32",
-                "name": "lastName",
-                "type": "uint32"
-              },
-              {
-                "internalType": "uint8",
-                "name": "shinyStyle",
-                "type": "uint8"
-              },
-              {
-                "internalType": "uint8",
-                "name": "class",
-                "type": "uint8"
-              },
-              {
-                "internalType": "uint8",
-                "name": "subClass",
-                "type": "uint8"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroInfo",
-            "name": "info",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "staminaFullAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "hpFullAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "mpFullAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint16",
-                "name": "level",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint64",
-                "name": "xp",
-                "type": "uint64"
-              },
-              {
-                "internalType": "address",
-                "name": "currentQuest",
-                "type": "address"
-              },
-              {
-                "internalType": "uint8",
-                "name": "sp",
-                "type": "uint8"
-              },
-              {
-                "internalType": "enum IHeroTypes.HeroStatus",
-                "name": "status",
-                "type": "uint8"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroState",
-            "name": "state",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "strength",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "intelligence",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "wisdom",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "luck",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "agility",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "vitality",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "endurance",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "dexterity",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hp",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mp",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "stamina",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroStats",
-            "name": "stats",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "strength",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "intelligence",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "wisdom",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "luck",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "agility",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "vitality",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "endurance",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "dexterity",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpLg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpLg",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroStatGrowth",
-            "name": "primaryStatGrowth",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "strength",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "intelligence",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "wisdom",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "luck",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "agility",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "vitality",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "endurance",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "dexterity",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "hpLg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpSm",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpRg",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "mpLg",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroStatGrowth",
-            "name": "secondaryStatGrowth",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint16",
-                "name": "mining",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "gardening",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "foraging",
-                "type": "uint16"
-              },
-              {
-                "internalType": "uint16",
-                "name": "fishing",
-                "type": "uint16"
-              }
-            ],
-            "internalType": "struct IHeroTypes.HeroProfessions",
-            "name": "professions",
-            "type": "tuple"
-          }
-        ],
-        "internalType": "struct IHeroTypes.Hero[]",
-        "name": "_heroes",
-        "type": "tuple[]"
-      }
-    ],
-    "name": "_partyMMScore",
-    "outputs": [
-      {
-        "internalType": "uint64",
-        "name": "",
-        "type": "uint64"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -2363,7 +2303,7 @@
       },
       {
         "internalType": "address",
-        "name": "_duelRaffleTicket",
+        "name": "_raffleWholesale",
         "type": "address"
       },
       {
@@ -2373,7 +2313,7 @@
       },
       {
         "internalType": "address",
-        "name": "_jewelToken",
+        "name": "_powerToken",
         "type": "address"
       },
       {
