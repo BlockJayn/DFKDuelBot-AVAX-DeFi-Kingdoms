@@ -37,7 +37,7 @@
     "jewelfee": "0x016345785d8a0000"
   },
   "blacklist": {
-    "heroBlacklistIds": [98765, 65432],
+    "heroBlacklistIds": [98765],
     "blacklistActive": false,
     "blacklistLobbyOnly": false
   }
