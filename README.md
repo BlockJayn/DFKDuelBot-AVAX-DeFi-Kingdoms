@@ -13,7 +13,7 @@ The bot sends repetitive transactions in a loop to the duel-smart-contract and h
 3. Avoids blacklisted players that are too strong. (via blacklisted Hero-Ids in config - only in 1vs1 game-type currently)
 4. Switches the RPC-network automatically to counteract network-outages
 5. The Bot also has several options to set your own customized preferences
-   If you're finding DFKQuestRunner valuable, give this repository a "Star" on github. Thx!
+   If you're finding this script valuable, give this repository a "Star" on github. Thx!
 
 ## Setup
 
