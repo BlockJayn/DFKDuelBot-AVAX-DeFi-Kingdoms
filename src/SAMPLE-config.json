@@ -29,7 +29,7 @@
     "heroid": [76543],
     "background": 4,
     "stat": 8,
-    "fallbackHeroid": [87654],
+    "fallbackHeroid": [87654, 12345],
     "fallbackBackground": 1,
     "fallbackStat": 2,
     "useFallbackHero": false,
