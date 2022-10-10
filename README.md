@@ -1,6 +1,7 @@
 If you appreciate my efforts and you're finding this DFK Duel Bot valuable, please give this repository a "Star" on github. Thx!
 
 # DFK Duel Bot
+
 ![Screenshot 2022-10-10 at 10 04 19](https://user-images.githubusercontent.com/99530800/194822143-aa4801d3-939a-40f3-adf1-85803764b483.png)
 
 ## What can this Bot do?
@@ -37,8 +38,7 @@ I strongly recommend to run the script via "pm2" instead of "npm" (after setup v
 
 - Install pm2 via "npm install pm2 -g"
 - pm2 restarts the script automatically in case of a script-crash due to certain circumstances
-
-You probably need to copy your "w.json" into the src-folder, as PM2 has a different way to look for this files path.
+- You need to copy your "w.json" into the folder "src/runner", as PM2 has a different way to look for the files location/path.
 
 ## Commands: (executable while in folder ../src/runner/ )
 
