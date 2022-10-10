@@ -34,7 +34,7 @@ Note: If you haven't played any duel yet in DFK, get into the game (Tavern/Duel)
 
 ## Run the script
 
-I strongly recommend to run the script via "pm2" instead of "npm" (after setup via "npm"), as there can be some reasons why the script crashes or needs to be restarted from scratch automatically. "pm2" does exactly this, restarting the script automatically if necessary. (which is also considered in this script-code)
+I strongly recommend to run the script via "pm2" instead of "npm" (after setup and testing via "npm"), as there can be some reasons why the script crashes or needs to be restarted from scratch automatically. "pm2" does exactly this, restarting the script automatically if necessary. (which is also considered in this script-code)
 
 - Install pm2 via "npm install pm2 -g"
 - pm2 restarts the script automatically in case of a script-crash due to certain circumstances
