@@ -27,6 +27,8 @@ The bot sends repetitive transactions in a loop to the duel-smart-contract and h
    CAUTION! The Script will generate a "w.json" file which contains your encrypted seed phrase
    !!! NEVER SHARE ANY FILE OF THIS SCRIPT WITH ANYONE, ESPECIALLY "w.json" AND "config.json"
 
+   Note: If you haven't done any duel yet in DFK, get into the game (Tavern/Duel) and make sure you've approved the contracts first by pressing "Approve Gold" and "Approve Crystal". Otherweise the script won't work.
+
 ## Run the script
 
 I strongly recommend to run the script via "pm2" instead of "npm" (after setup via "npm"), as there can be some reasons why the script crashes or needs to be restarted from scratch automatically. "pm2" does exactly this, restarting the script automatically if necessary. (which is also considered in this script-code)
