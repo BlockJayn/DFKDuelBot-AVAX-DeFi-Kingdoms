@@ -5,8 +5,8 @@ If you appreciate my efforts and you're finding this DFK Duel Bot valuable, plea
 
 ## What can this Bot do?
 
-This is a Duel-Bot for the Harmony / DeFi-Kingdoms game.
-The Bot automatically enters the game-lobby to fight other players in DeFi-Kingdoms, a DeFi game built on the Harmony-blockchain.
+This is a Duel-Bot for DeFi-Kingdoms, a DeFi-game on Avalanche.
+The Bot automatically enters the game-lobby to fight other players in DeFi-Kingdoms, a DeFi game built on the AVAX-blockchain.
 The bot sends repetitive transactions in a loop to the duel-smart-contract and has the following functions:
 
 1. Join the game-lobby with a hero automatically
