@@ -5,16 +5,15 @@ If you appreciate my efforts and you're finding this DFK Duel Bot valuable, plea
 
 ## What can this Bot do?
 
-This is a Duel-Bot for DeFi-Kingdoms, a DeFi-game on Avalanche.
-The Bot automatically enters the game-lobby to fight other players in DeFi-Kingdoms, a DeFi game built on the AVAX-blockchain.
+This is a Duel-Bot for DeFi-Kingdom, a DeFi game built on the AVAX-Blockchain (Avalanche).
+The Bot automatically enters the game-lobby to fight other players in DeFi-Kingdoms.
 The bot sends repetitive transactions in a loop to the duel-smart-contract and has the following functions:
 
 1. Join the game-lobby with a hero automatically
-2. Autocomplete the game automatically if there is a duel-match
+2. Automatically complete the game if there is a duel-match
 3. Avoids blacklisted players that are too strong. (via blacklisted Hero-Ids in config - only in 1vs1 game-type currently)
 4. Switches the RPC-network automatically to counteract network-outages
 5. The Bot also has several options to set your own customized preferences
-   If you're finding this script valuable, give this repository a "Star" on github. Thx!
 
 ## Setup
 
@@ -38,6 +37,8 @@ I strongly recommend to run the script via "pm2" instead of "npm" (after setup v
 
 - Install pm2 via "npm install pm2 -g"
 - pm2 restarts the script automatically in case of a script-crash due to certain circumstances
+
+You probably need to copy your "w.json" into the src-folder, as PM2 has a different way to look for this files path.
 
 ## Commands: (executable while in folder ../src/runner/ )
 
