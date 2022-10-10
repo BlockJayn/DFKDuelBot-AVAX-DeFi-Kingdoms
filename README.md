@@ -1,6 +1,7 @@
 If you appreciate my efforts and you're finding this DFK Duel Bot valuable, please give this repository a "Star" on github. Thx!
 
 # DFK Duel Bot
+![Screenshot 2022-10-10 at 10 04 19](https://user-images.githubusercontent.com/99530800/194822143-aa4801d3-939a-40f3-adf1-85803764b483.png)
 
 ## What can this Bot do?
 
