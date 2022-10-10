@@ -1,6 +1,6 @@
 If you're finding DFKDuelRunner valuable, give this repository a "Star" on github. Thx!
 
-# DFKDuelRunner
+# DFK Duel Bot
 
 ## What can this Bot do?
 
