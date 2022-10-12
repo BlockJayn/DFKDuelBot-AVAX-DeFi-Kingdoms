@@ -42,7 +42,7 @@ const seedPassword = config.wallet.seedPassword; //  Password for encrypting you
 const gameType = config.game.gameType; //  Duel Game-Type = 1, 3 or 9
 const heroid = config.game.heroid; //  Duel Hero ID(s), like [ '260714', '154849', '30932' ]
 const fallbackHeroid = config.game.fallbackHeroid; //  Duel Hero ID(s), like [ '260714', '154849', '30932' ]
-const jewelfee = config.game.jewelfee; //  Duel Jewel-Fee in HEX = 100000000000000000
+const jewelfee = config.game.jewelfee; //  Duel Jewel-Fee in HEX:  0.1 = 0x016345785d8a0000 || 0.3 = 0x429D069189E0000
 const background = config.game.background; //  Duel Background
 const stat = config.game.stat; //  Duel Stat
 const fallbackBackground = config.game.fallbackBackground; //  Duel Background
