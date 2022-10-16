@@ -18,15 +18,12 @@ const axios = require("axios");
 const ethers = require("ethers");
 const config = require("../config.json");
 const abiduel = require("./abi-duel.json");
-const abijewel = require("./abi-token-jewel.json");
 const abicrystal = require("./abi-token-crystal.json");
 const abigold = require("./abi-token-gold.json");
 const abiraffletickets = require("./abi-raffle-tickets.json");
 
-
 let provider,
     duelContract,
-    jewelContract,
     crystalContract,
     goldContract,
     raffleticketsContract,
@@ -38,7 +35,7 @@ let provider,
     jewelBalance,
     crystalBalance,
     goldBalance,
-    raffleticketsBalance
+    raffleticketsBalance;
 let receipt = { status: null };
 
 // DFK Develper-API
@@ -145,27 +142,27 @@ async function getPlayerDuelEntries(walletaddress) {
             Background: ${playerDuelEntries.custom1} | Stat: ${playerDuelEntries.custom2}
             `);
         /*
-            console.log(`
-            🙋‍♂️‍ Found Hero in Lobby waiting for a Match:
-                Lobby ID: ${playerDuelEntries[0]}
-                Player Address: ${playerDuelEntries[1]}
-                Hero IDs: ${playerDuelEntries[2]}
-                StartBlock: ${playerDuelEntries[3]}
-                Score: ${playerDuelEntries[4]}
-                Score After: ${playerDuelEntries[5]}
-                JewelFee: ${playerDuelEntries[6]}
-                Duel ID: ${playerDuelEntries[7]}
-                Background: ${playerDuelEntries[8]}
-                Stat: ${playerDuelEntries[9]}
-                Duel Type: ${playerDuelEntries[10]}
-                Status: ${playerDuelEntries[11]}
-                `)
-            */
+                console.log(`
+                🙋‍♂️‍ Found Hero in Lobby waiting for a Match:
+                    Lobby ID: ${playerDuelEntries[0]}
+                    Player Address: ${playerDuelEntries[1]}
+                    Hero IDs: ${playerDuelEntries[2]}
+                    StartBlock: ${playerDuelEntries[3]}
+                    Score: ${playerDuelEntries[4]}
+                    Score After: ${playerDuelEntries[5]}
+                    JewelFee: ${playerDuelEntries[6]}
+                    Duel ID: ${playerDuelEntries[7]}
+                    Background: ${playerDuelEntries[8]}
+                    Stat: ${playerDuelEntries[9]}
+                    Duel Type: ${playerDuelEntries[10]}
+                    Status: ${playerDuelEntries[11]}
+                    `)
+                */
         /*
-            for (let index = 0; index < playerDuelEntries.length; index++) {
-                console.log("index:" + index + ":")
-                console.log(playerDuelEntries[index])
-            */
+                for (let index = 0; index < playerDuelEntries.length; index++) {
+                    console.log("index:" + index + ":")
+                    console.log(playerDuelEntries[index])
+                */
 
         return playerDuelEntries[0];
     } else {
@@ -194,27 +191,27 @@ async function getActiveDuels(walletaddress) {
             Player 1 Heroes: ${activeDuels[6]} | Player 2 Heroes: ${activeDuels[7]}
             `);
         /*
-            console.log(`
-            🤼‍♂ Found Active Duel:
-                Duel ID: ${activeDuels[0]}
-                Player 1 Address: ${activeDuels[1]}
-                Player 2 Address: ${activeDuels[2]}
-                Player 1 Lobby ID: ${activeDuels[3]}
-                Player 2 Lobby ID: ${activeDuels[4]}
-                Winner Address: ${activeDuels[5]}
-                Player 1 Heroes: ${activeDuels[6]}
-                Player 2 Heroes: ${activeDuels[7]}
-                StartBlock: ${activeDuels[8]}
-                Duel Type: ${activeDuels[9]}
-                Status: ${activeDuels[10]}
-            `)
-            */
+                console.log(`
+                🤼‍♂ Found Active Duel:
+                    Duel ID: ${activeDuels[0]}
+                    Player 1 Address: ${activeDuels[1]}
+                    Player 2 Address: ${activeDuels[2]}
+                    Player 1 Lobby ID: ${activeDuels[3]}
+                    Player 2 Lobby ID: ${activeDuels[4]}
+                    Winner Address: ${activeDuels[5]}
+                    Player 1 Heroes: ${activeDuels[6]}
+                    Player 2 Heroes: ${activeDuels[7]}
+                    StartBlock: ${activeDuels[8]}
+                    Duel Type: ${activeDuels[9]}
+                    Status: ${activeDuels[10]}
+                `)
+                */
         /*
-            for (let index = 0; index < activeDuels.length; index++) {
-                console.log("index:" + index + ":")
-                console.log(activeDuels[index])
-            }
-            */
+                for (let index = 0; index < activeDuels.length; index++) {
+                    console.log("index:" + index + ":")
+                    console.log(activeDuels[index])
+                }
+                */
 
         return {
             duelID: activeDuels[0],
@@ -287,22 +284,22 @@ async function checkOpponentActivity(heroBlacklistIds) {
 
                 let playerDuelEntries = getPlayerDuelEntries[0];
                 /*
-                        console.log(`
-                                🚨 Found Opponent waiting in the Lobby:
-                                Lobby ID: ${playerDuelEntries[0]}
-                                Player Address: ${playerDuelEntries[1]}
-                                Hero IDs: ${playerDuelEntries[2]}
-                                StartBlock: ${playerDuelEntries[3]}
-                                Score: ${playerDuelEntries[4]}
-                                Score After: ${playerDuelEntries[5]}
-                                JewelFee: ${playerDuelEntries[6]}
-                                Duel ID: ${playerDuelEntries[7]}
-                                Background: ${playerDuelEntries[8]}
-                                Stat: ${playerDuelEntries[9]}
-                                Duel Type: ${playerDuelEntries[10]}
-                                Status: ${playerDuelEntries[11]}
-                                `)
-                        */
+                                console.log(`
+                                        🚨 Found Opponent waiting in the Lobby:
+                                        Lobby ID: ${playerDuelEntries[0]}
+                                        Player Address: ${playerDuelEntries[1]}
+                                        Hero IDs: ${playerDuelEntries[2]}
+                                        StartBlock: ${playerDuelEntries[3]}
+                                        Score: ${playerDuelEntries[4]}
+                                        Score After: ${playerDuelEntries[5]}
+                                        JewelFee: ${playerDuelEntries[6]}
+                                        Duel ID: ${playerDuelEntries[7]}
+                                        Background: ${playerDuelEntries[8]}
+                                        Stat: ${playerDuelEntries[9]}
+                                        Duel Type: ${playerDuelEntries[10]}
+                                        Status: ${playerDuelEntries[11]}
+                                        `)
+                                */
 
                 // Add active Heroes to Array, if they play the same Game-Type as in our config.json
 
@@ -345,21 +342,21 @@ async function checkOpponentActivity(heroBlacklistIds) {
 
                     let activeDuels = getActiveDuels[0];
                     /*
-                              console.log(`
-                              🚨 Found Opponent having an Active Duel:
-                                  Duel ID: ${activeDuels[0]}
-                                  Player 1 Address: ${activeDuels[1]}
-                                  Player 2 Address: ${activeDuels[2]}
-                                  Player 1 Lobby ID: ${activeDuels[3]}
-                                  Player 2 Lobby ID: ${activeDuels[4]}
-                                  Winner Address: ${activeDuels[5]}
-                                  Player 1 Heroes: ${activeDuels[6]}
-                                  Player 2 Heroes: ${activeDuels[7]}
-                                  StartBlock: ${activeDuels[8]}
-                                  Duel Type: ${activeDuels[9]}
-                                  Status: ${activeDuels[10]}
-                              `)
-                              */
+                                        console.log(`
+                                        🚨 Found Opponent having an Active Duel:
+                                            Duel ID: ${activeDuels[0]}
+                                            Player 1 Address: ${activeDuels[1]}
+                                            Player 2 Address: ${activeDuels[2]}
+                                            Player 1 Lobby ID: ${activeDuels[3]}
+                                            Player 2 Lobby ID: ${activeDuels[4]}
+                                            Winner Address: ${activeDuels[5]}
+                                            Player 1 Heroes: ${activeDuels[6]}
+                                            Player 2 Heroes: ${activeDuels[7]}
+                                            StartBlock: ${activeDuels[8]}
+                                            Duel Type: ${activeDuels[9]}
+                                            Status: ${activeDuels[10]}
+                                        `)
+                                        */
 
                     // Add active Heroes to Array, if they play the same Game-Type as in our config.json
 
@@ -427,48 +424,42 @@ async function checkOpponentActivity(heroBlacklistIds) {
 // Function: GetTokenBalance (Jewel, Crystal, Gold)
 
 async function getTokenBalance(walletaddress) {
-
     try {
-
         // JEWEL
-        jewelBalance = await provider.getBalance(walletaddress)
-        jewelBalance = ethers.utils.formatEther(jewelBalance)
-        jewelBalance = Math.round(jewelBalance * 100) / 100
+        jewelBalance = await provider.getBalance(walletaddress);
+        jewelBalance = ethers.utils.formatEther(jewelBalance);
+        jewelBalance = Math.round(jewelBalance * 100) / 100;
         //console.log('jewelBalance', jewelBalance)
 
         // CRYSTAL
         crystalBalance = await crystalContract.balanceOf(walletaddress);
-        crystalBalance = ethers.utils.formatEther(crystalBalance)
-        crystalBalance = Math.round(crystalBalance * 100) / 100
+        crystalBalance = ethers.utils.formatEther(crystalBalance);
+        crystalBalance = Math.round(crystalBalance * 100) / 100;
         //console.log("crystalBalance", crystalBalance)
 
         // GOLD
         goldBalance = await goldContract.balanceOf(walletaddress);
-        goldBalance = ethers.utils.formatUnits(goldBalance, 3)
-        goldBalance = Math.round(goldBalance * 100) / 100
-
+        goldBalance = ethers.utils.formatUnits(goldBalance, 3);
+        goldBalance = Math.round(goldBalance * 100) / 100;
         //console.log("goldBalance", goldBalance)
 
         // Raffle Tickets
         raffleticketsBalance = await raffleticketsContract.balanceOf(walletaddress);
-        raffleticketsBalance = Number(raffleticketsBalance)
+        raffleticketsBalance = Number(raffleticketsBalance);
         //console.log("raffleticketsBalance", raffleticketsBalance)
 
         return {
             jewel: jewelBalance,
             crystal: crystalBalance,
             gold: goldBalance,
-            raffletickets: raffleticketsBalance
-        }
-
-    }
-    catch (err) {
+            raffletickets: raffleticketsBalance,
+        };
+    } catch (err) {
         console.log("❌ \x1b[31mError checking balance.\x1b[0m\n");
 
         /* Try again */
         consoleCountdown(waitTimeAfterError, "Let's try again", "restart");
     }
-
 }
 
 // Function: RPC Network / Provider
@@ -527,38 +518,61 @@ async function start() {
         provider = new ethers.providers.JsonRpcProvider(getRpc());
 
         duelContract = new ethers.Contract(config.duelContract, abiduel, provider);
-        jewelContract = new ethers.Contract(config.jewelContract, abijewel, provider);
-        crystalContract = new ethers.Contract(config.crystalContract, abicrystal, provider);
-        goldContract = new ethers.Contract(config.goldContract, abigold, provider);
-        raffleticketsContract = new ethers.Contract(config.raffleTicketsContract, abiraffletickets, provider);
+        crystalContract = new ethers.Contract(
+            config.crystalContract,
+            abicrystal,
+            provider
+        );
 
+        goldContract = new ethers.Contract(config.goldContract, abigold, provider);
+
+        raffleticketsContract = new ethers.Contract(
+            config.raffleTicketsContract,
+            abiraffletickets,
+            provider
+        );
 
         wallet = (await fs.existsSync(config.wallet.encryptedWalletPath))
             ? await getEncryptedWallet()
             : await createWallet();
 
         // Check Token Balance of Player (Jewel, Crystal, Gold)
-        const tokenBalance = await getTokenBalance(config.wallet.address)
+        const tokenBalance = await getTokenBalance(config.wallet.address);
 
         console.log("🏦\x1b[35m Your Balance:\n\x1b[0m");
-        console.log(`     \x1b[96m💎 ${tokenBalance.crystal} CRYSTAL\x1b[0m    \x1b[93m💰 ${tokenBalance.gold} GOLD\x1b[0m    \x1b[92m🟢 ${tokenBalance.jewel} JEWEL\x1b[0m    \x1b[97m📃 ${tokenBalance.raffletickets} Raffle Tickets\x1b[0m\n\n`);
+        console.log(
+            `     \x1b[96m💎 ${tokenBalance.crystal} CRYSTAL\x1b[0m    \x1b[93m💰 ${tokenBalance.gold} GOLD\x1b[0m    \x1b[92m🟢 ${tokenBalance.jewel} JEWEL\x1b[0m    \x1b[97m📃 ${tokenBalance.raffletickets} Raffle Tickets\x1b[0m\n\n`
+        );
 
         if (tokenBalance.crystal < config.minimumTokenBalanceToPlay.crystal) {
-            console.log("🏆\x1b[91m You don't have enough 💎 CRYSTAL to play!\x1b[0m");
-            await consoleCountdown(waitTimeOutOfToken, "The Script has been stopped. Please get more 💎 CRYSTAL and restart the script.", "restart");
-            process.exit()
+            console.log(
+                "🏆\x1b[91m You don't have enough 💎 CRYSTAL to play!\x1b[0m"
+            );
+            await consoleCountdown(
+                waitTimeOutOfToken,
+                "The Script has been stopped. Please get more 💎 CRYSTAL and restart the script.",
+                "restart"
+            );
+            process.exit();
         }
         if (tokenBalance.gold < config.minimumTokenBalanceToPlay.gold) {
             console.log("🏆\x1b[91m You don't have enough 💰 GOLD to play!\x1b[0m");
-            await consoleCountdown(waitTimeOutOfToken, "The Script has been stopped. Please get more 💰 GOLD and restart the script.", "restart");
-            process.exit()
+            await consoleCountdown(
+                waitTimeOutOfToken,
+                "The Script has been stopped. Please get more 💰 GOLD and restart the script.",
+                "restart"
+            );
+            process.exit();
         }
         if (tokenBalance.jewel < config.minimumTokenBalanceToPlay.jewel) {
             console.log("🏆\x1b[91m You don't have enough 🟢 JEWEL to play!\x1b[0m");
-            await consoleCountdown(waitTimeOutOfToken, "The Script has been stopped. Please get more 🟢 JEWEL and restart the script.", "restart");
-            process.exit()
+            await consoleCountdown(
+                waitTimeOutOfToken,
+                "The Script has been stopped. Please get more 🟢 JEWEL and restart the script.",
+                "restart"
+            );
+            process.exit();
         }
-
 
         // If AutoCompleteDuel is activated, check for active Duel and Complete
 
@@ -575,15 +589,13 @@ async function start() {
                     await autoCompleteActiveDuel(duelToComplete.duelID);
 
                     // Check if game has been won/lost
-                    let getDuel = await duelContract.getDuel(duelToComplete.duelID)
+                    let getDuel = await duelContract.getDuel(duelToComplete.duelID);
 
                     if (getDuel.winner === config.wallet.address) {
                         console.log("🏆\x1b[32m You WON the match!\n\x1b[0m");
-                    }
-                    else {
+                    } else {
                         console.log("💀\x1b[31m You LOST the match!\n\x1b[0m");
                     }
-
                 } else {
                     console.log(
                         `⏱‍  Auto-Completing Duel ${duelToComplete.duelID} delayed to save some fees.\n`
@@ -668,7 +680,9 @@ async function start() {
             }
         }
     } catch (err) {
-        console.error(`❌ \x1b[31mNetwork Error: Unable to run:\x1b[0m ${err.message}`);
+        console.error(
+            `❌ \x1b[31mNetwork Error: Unable to run:\x1b[0m ${err.message}`
+        );
 
         /* Try again */
         consoleCountdown(waitTimeAfterError, "Let's try again", "restart");
@@ -774,7 +788,9 @@ async function consoleCountdown(timeToWait, message, action) {
 
 async function autoCompleteActiveDuel(duelId) {
     try {
-        console.log(`🤼‍♂‍  \x1b[96mTrying to complete Active Duel ${duelId}...\x1b[0m\n`);
+        console.log(
+            `🤼‍♂‍  \x1b[96mTrying to complete Active Duel ${duelId}...\x1b[0m\n`
+        );
 
         await tryTransactionAutocompleteDuel(
             duelContract.connect(wallet).completeDuel(duelId)
@@ -819,7 +835,9 @@ async function tryTransactionAutocompleteDuel(transaction) {
     } catch (err) {
         clearTimeout(timeout);
 
-        console.log("❌ \x1b[31mError broadcasting transaction for autocompleting Duel.\x1b[0m\n");
+        console.log(
+            "❌ \x1b[31mError broadcasting transaction for autocompleting Duel.\x1b[0m\n"
+        );
     }
 }
 
@@ -831,19 +849,15 @@ async function sendToDuel() {
 
     try {
         if (checkOpponent.foundOpponentActive) {
-
-
             if (gameType === 1) {
                 console.log(
                     `⚔️  \x1b[96mSending Fallback-Hero ${herodata.name} to Duel-Lobby...\x1b[0m\n`
                 );
-            }
-            else {
+            } else {
                 console.log(
                     `⚔️  \x1b[96mSending Fallback-Hero ${herodata.name} and others to Duel-Lobby...\x1b[0m\n`
                 );
             }
-
 
             await tryTransaction(
                 duelContract
@@ -857,12 +871,14 @@ async function sendToDuel() {
                     )
             );
         } else {
-
             if (gameType === 1) {
-                console.log(`⚔️  \x1b[96mSending ${herodata.name} to Duel-Lobby...\x1b[0m\n`);
-            }
-            else {
-                console.log(`⚔️  \x1b[96mSending ${herodata.name} and others to Duel-Lobby...\x1b[0m\n`);
+                console.log(
+                    `⚔️  \x1b[96mSending ${herodata.name} to Duel-Lobby...\x1b[0m\n`
+                );
+            } else {
+                console.log(
+                    `⚔️  \x1b[96mSending ${herodata.name} and others to Duel-Lobby...\x1b[0m\n`
+                );
             }
 
             await tryTransaction(
