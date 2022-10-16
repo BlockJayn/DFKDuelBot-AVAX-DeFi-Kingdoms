@@ -5,6 +5,9 @@
     "seedPassword": "REPLACE WITH YOUR SEED PASSWORD"
   },
   "duelContract": "0xf724FE22b45D519D149477aA2eC5348Cee08Cae3",
+  "crystalContract": "0x04b9dA42306B023f3572e106B11D82aAd9D32EBb",
+  "goldContract": "0x576C260513204392F0eC0bc865450872025CB1cA",
+  "raffleTicketsContract": "0xBbd7c4Be2e54fF5e013471162e1ABAD7AB74c3C3",
   "rpc": {
     "rpc_auto_switch": true,
     "useBackupRpc": true,
@@ -16,29 +19,35 @@
     "gasLimit": 9000000
   },
   "timers": {
-    "waitTimeAfterSuccess": 10,
-    "waitTimeAfterError": 10,
+    "waitTimeAfterSuccess": 15,
+    "waitTimeAfterError": 15,
     "waitTimeAfterTXFail": 10,
     "transaction_timeout": 70,
-    "waitTimeLobby": 10,
+    "waitTimeLobby": 15,
     "waitBlockTimeToAutocomplete": 100,
-    "waitTimeBlacklist": 20
+    "waitTimeBlacklist": 20,
+    "waitTimeOutOfToken": 99900
   },
   "game": {
-    "gameType": 1,
-    "heroid": [76543],
-    "background": 4,
-    "stat": 8,
-    "fallbackHeroid": [87654, 12345],
+    "gameType": 3,
+    "heroid": [65432, 76543, 87654],
+    "background": 6,
+    "stat": 6,
+    "fallbackHeroid": [123456, 34567, 63245],
     "fallbackBackground": 1,
     "fallbackStat": 2,
     "useFallbackHero": false,
     "activateAutoCompleteDuel": true,
-    "jewelfee": "0x016345785d8a0000"
+    "jewelfee": "0x429D069189E0000"
   },
   "blacklist": {
     "heroBlacklistIds": [98765],
     "blacklistActive": false,
     "blacklistLobbyOnly": false
+  },
+  "minimumTokenBalanceToPlay": {
+    "jewel": 1,
+    "crystal": 1,
+    "gold": 100
   }
 }
