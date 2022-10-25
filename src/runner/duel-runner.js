@@ -869,7 +869,7 @@ async function sendToDuel() {
                         jewelfee,
                         fallbackBackground,
                         fallbackStat,
-                        { gasPrice: 10000000000, gasLimit: 30000000 }
+                        { gasPrice: config.gas.gasPrice, gasLimit: config.gasLimit }
                     )
             );
         } else {
@@ -886,7 +886,7 @@ async function sendToDuel() {
             await tryTransaction(
                 duelContract
                     .connect(wallet)
-                    .enterDuelLobby(gameType, heroid, jewelfee, background, stat, { gasPrice: 10000000000, gasLimit: 30000000 })
+                    .enterDuelLobby(gameType, heroid, jewelfee, background, stat, { gasPrice: config.gas.gasPrice, gasLimit: config.gas.gasLimit })
             );
         }
     } catch (err) {
