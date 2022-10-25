@@ -838,6 +838,7 @@ async function tryTransactionAutocompleteDuel(transaction) {
         console.log(
             "❌ \x1b[31mError broadcasting transaction for autocompleting Duel.\x1b[0m\n"
         );
+        console.log(err)
     }
 }
 
@@ -867,7 +868,8 @@ async function sendToDuel() {
                         fallbackHeroid,
                         jewelfee,
                         fallbackBackground,
-                        fallbackStat
+                        fallbackStat,
+                        { gasPrice: 10000000000, gasLimit: 30000000 }
                     )
             );
         } else {
@@ -884,7 +886,7 @@ async function sendToDuel() {
             await tryTransaction(
                 duelContract
                     .connect(wallet)
-                    .enterDuelLobby(gameType, heroid, jewelfee, background, stat)
+                    .enterDuelLobby(gameType, heroid, jewelfee, background, stat, { gasPrice: 10000000000, gasLimit: 30000000 })
             );
         }
     } catch (err) {
@@ -944,6 +946,7 @@ async function tryTransaction(transaction) {
             console.log(
                 "⚠️  There is a Network-Problem, or you don't have enough ONE/JEWEL/GOLD in your Wallet)\n"
             );
+            console.log(err)
 
             /* Error Transaction - Start again after a while */
             consoleCountdown(waitTimeAfterError, "Let's try again", "restart");
@@ -951,7 +954,7 @@ async function tryTransaction(transaction) {
             console.log(
                 "❌ \x1b[31mError broadcasting transaction for sending Hero to Duel Lobby.\x1b[0m\n"
             );
-
+            console.log(err)
             /* Error Transaction - Start again after a while */
             consoleCountdown(waitTimeAfterTXFail, "Let's try again", "restart");
         }
@@ -973,3 +976,5 @@ async function getHeroMetaData(heroID) {
 
 // Run Script
 start();
+
+
