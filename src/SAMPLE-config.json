@@ -15,8 +15,8 @@
     "avaxRpcBackup": "https://avax-dfk.gateway.pokt.network/v1/lb/6244818c00b9f0003ad1b619/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc"
   },
   "gas": {
-    "gasPrice": 120000000000,
-    "gasLimit": 9000000
+    "gasPrice": 10000000000,
+    "gasLimit": 30000000
   },
   "timers": {
     "waitTimeAfterSuccess": 15,

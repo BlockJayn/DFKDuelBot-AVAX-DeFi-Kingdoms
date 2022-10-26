@@ -793,7 +793,7 @@ async function autoCompleteActiveDuel(duelId) {
         );
 
         await tryTransactionAutocompleteDuel(
-            duelContract.connect(wallet).completeDuel(duelId)
+            duelContract.connect(wallet).completeDuel(duelId, { gasPrice: 10000000000, gasLimit: 30000000 })
         );
     } catch (err) {
         console.warn("⚠️  \x1b[31mError completing duel\x1b[0m");
@@ -869,7 +869,7 @@ async function sendToDuel() {
                         jewelfee,
                         fallbackBackground,
                         fallbackStat,
-                        { gasPrice: config.gas.gasPrice, gasLimit: config.gasLimit }
+                        { gasPrice: 10000000000, gasLimit: 30000000 }
                     )
             );
         } else {
@@ -886,7 +886,7 @@ async function sendToDuel() {
             await tryTransaction(
                 duelContract
                     .connect(wallet)
-                    .enterDuelLobby(gameType, heroid, jewelfee, background, stat, { gasPrice: config.gas.gasPrice, gasLimit: config.gas.gasLimit })
+                    .enterDuelLobby(gameType, heroid, jewelfee, background, stat, { gasPrice: 10000000000, gasLimit: 30000000 })
             );
         }
     } catch (err) {
